@@ -57,12 +57,28 @@
                     buildInputs = [pipewire];
                   };
 
+                  gobject-sys = attrs: {
+                    nativeBuildInputs = [pkg-config rustPlatform.bindgenHook];
+                    buildInputs = [glib];
+                  };
+
+                  gio-sys = attrs: {
+                    nativeBuildInputs = [pkg-config rustPlatform.bindgenHook];
+                    buildInputs = [glib];
+                  };
+
                   niri-config = attrs: {
                     prePatch = ''sed -i 's#\.\./\.\.#${niri-src}#' src/lib.rs'';
                   };
 
                   niri = attrs: {
-                    buildInputs = [libxkbcommon libinput mesa libglvnd wayland];
+                    buildInputs = [
+                      libxkbcommon
+                      libinput
+                      mesa
+                      libglvnd
+                      wayland
+                  ];
 
                     # niri is alpha-quality software, and as such it is important for backtraces to be readable
                     dontStrip = true;
